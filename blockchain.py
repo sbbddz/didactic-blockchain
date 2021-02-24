@@ -5,14 +5,16 @@ class Chain():
 
     def __init__(self):
         self.chain = []
-        self.transations = []
+        self.transactions = []
+
+        self.new_block(proof=6969, pre_hash=1)
 
     def new_block(self, proof, pre_hash=None):
 
         block = {
             'id': len(self.chain) + 1,
             'timestamp': time(),
-            'transations': self.transations,
+            'transactions': self.transactions,
             'proof': proof,
             'pre_hash': pre_hash or utils.hash(self.chain[-1])
         }
@@ -21,8 +23,8 @@ class Chain():
         self.chain.append(block)
         return block
 
-    def new_transation(self, sender, receiver, amount):
-        self.transations.append(
+    def new_transaction(self, sender, receiver, amount):
+        self.transactions.append(
             {
                 'sender': sender,
                 'receiver': receiver,
@@ -41,4 +43,4 @@ class Chain():
 
     @property
     def last_block(self):
-        pass
+        return self.chain[-1]
